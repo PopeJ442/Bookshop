@@ -10,14 +10,19 @@ using PopePhransisBookStore.DTO;
 
 namespace PopePhransisBookStore.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class PopePhransisBookStore(IBookRepository bookRepository, IMapper mapper) : ControllerBase
+    [Produces("application/json")]
+    [Route("api/[controller]")]
+      public class PopePhransisBookStore(IBookRepository bookRepository, IMapper mapper) : ControllerBase
     {
         private readonly IBookRepository bookRepository = bookRepository;
         private readonly IMapper mapper = mapper;
 
-
+        /// <summary>
+        /// This endpoint is used to create a new book 
+        /// </summary>
+        /// <param name="bookDto"></param>
+        /// <returns></returns>
         [Authorize]
         [HttpPost("CreateBook")]
        public async Task<ActionResult<BookDTO>> CreateBook([FromBody] BookDTO bookDto)
@@ -38,8 +43,12 @@ namespace PopePhransisBookStore.Controllers
    
     return CreatedAtAction(nameof(GetBook), new { id = createdBook.Id }, createdBookDto);
 }
-
-         [Authorize]
+        /// <summary>
+        /// This endpoint is used to get  book 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Authorize]
         [HttpGet("GetBook/{id}")]
         public async Task<ActionResult<BookDTO>> GetBook(int id)
         {
@@ -54,8 +63,14 @@ namespace PopePhransisBookStore.Controllers
             return Ok(bookDto);
         }
 
-        [Authorize]
+
+        /// <summary>
+        /// This endpoint gets all the books in the system
+        /// </summary>
+        /// <response code= "200"> Returns the list of all the books"</response>
+       // [Authorize]
         [HttpGet("ListOfBooks")]
+        [ProducesResponseType(200)] 
         public async Task<ActionResult<List<BookDTO>>> ListOfBooks()
         {
             var books = await bookRepository.ListOfBooks();
@@ -63,8 +78,17 @@ namespace PopePhransisBookStore.Controllers
    
             var bookDtos = mapper.Map<List<BookDTO>>(books);
             return Ok(bookDtos);
-        }
-        [Authorize]
+        } 
+
+
+
+        /// <summary>
+        /// This endpoint is used to update the details of a book
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="updatedBookDto"></param>
+        /// <returns></returns>
+       // [Authorize]
         [HttpPut("UpdateBook/{id}")]
         public async Task<ActionResult<BookDTO>> UpdateBook(int id, [FromBody] BookDTO updatedBookDto)
         {
@@ -90,8 +114,12 @@ namespace PopePhransisBookStore.Controllers
             return Ok(resultDto);
         }
 
-
-        [Authorize]
+        /// <summary>
+        ///This is used to delete a book
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        //[Authorize]
         [HttpDelete("DeleteBook/{id}")]
         public async Task<ActionResult> DeleteBook(int id)
         {

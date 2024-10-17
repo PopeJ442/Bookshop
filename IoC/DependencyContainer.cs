@@ -8,6 +8,7 @@ using PopePhransisBookStore.Data;
 using PopePhransisBookStore.MappingProfile;
 using PopePhransisBookStore.Repository;
 using Swashbuckle.AspNetCore.Filters;
+using System.Reflection;
 using System.Text;
 
 namespace PopePhransisBookStore.IoC
@@ -26,42 +27,61 @@ namespace PopePhransisBookStore.IoC
                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddSwaggerGen(options => {
+
+                options.OperationFilter<SecurityRequirementsOperationFilter>();
+                //options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}"));
+                options.IncludeXmlComments(@"C:\Users\POPE\Documents\C#\Steps\PopePhransisBookStore\PopePhransisBookStore\bin\Debug\net8.0\PopePhransisBookStore.xml");
+
                 options.AddSecurityDefinition("oauth2", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
                     Name = "Authorization",
                     Type = SecuritySchemeType.ApiKey
                 });
-                options.OperationFilter<SecurityRequirementsOperationFilter>();
+             
+
             });
 
-            services.Configure<IdentityOptions>(options =>
+            
+
+            services.AddApiVersioning(options =>
             {
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequireUppercase = true;
-                options.Password.RequiredLength = 8;
-                options.Password.RequiredUniqueChars = 1;
+                options.ReportApiVersions = true;
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.AssumeDefaultVersionWhenUnspecified = true;
+
+
             });
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = configuration["Jwt:Issuer"],
-        ValidAudience = configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
-    };
-});
+
+
+
+//            services.Configure<IdentityOptions>(options =>
+//            {
+//                options.Password.RequireDigit = true;
+//                options.Password.RequireLowercase = true;
+//                options.Password.RequireNonAlphanumeric = true;
+//                options.Password.RequireUppercase = true;
+//                options.Password.RequiredLength = 8;
+//                options.Password.RequiredUniqueChars = 1;
+//            });
+//            services.AddAuthentication(options =>
+//            {
+//                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//            })
+//.AddJwtBearer(options =>
+//{
+//    options.TokenValidationParameters = new TokenValidationParameters
+//    {
+//        ValidateIssuer = true,
+//        ValidateAudience = true,
+//        ValidateLifetime = true,
+//        ValidateIssuerSigningKey = true,
+//        ValidIssuer = configuration["Jwt:Issuer"],
+//        ValidAudience = configuration["Jwt:Audience"],
+//        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
+//    };
+//});
 
             services.AddApiVersioning(options =>
             {

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PopePhransisBookStore</name>
+    </assembly>
+    <members>
+        <member name="M:PopePhransisBookStore.Controllers.PopePhransisBookStore.CreateBook(PopePhransisBookStore.DTO.BookDTO)">
+            <summary>
+            This endpoint is used to create a new book 
+            </summary>
+            <param name="bookDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PopePhransisBookStore.Controllers.PopePhransisBookStore.GetBook(System.Int32)">
+            <summary>
+            This endpoint is used to get book 
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PopePhransisBookStore.Controllers.PopePhransisBookStore.ListOfBooks">
+            <summary>
+            This endpoint gets all the books in the system
+            </summary>
+            <response code= "200"> Returns the list of all the books"</response>
+        </member>
+        <member name="M:PopePhransisBookStore.Controllers.PopePhransisBookStore.UpdateBook(System.Int32,PopePhransisBookStore.DTO.BookDTO)">
+            <summary>
+            This endpoint is used to update the details of a book
+            </summary>
+            <param name="id"></param>
+            <param name="updatedBookDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PopePhransisBookStore.Controllers.PopePhransisBookStore.DeleteBook(System.Int32)">
+             <summary>
+            This is used to delete a book
+             </summary>
+             <param name="id"></param>
+             <returns></returns>
+        </member>
+        <member name="T:PopePhransisBookStore.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:PopePhransisBookStore.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:PopePhransisBookStore.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:PopePhransisBookStore.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

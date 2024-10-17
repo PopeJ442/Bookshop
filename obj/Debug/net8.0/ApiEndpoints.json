@@ -17,9 +17,7 @@
       {
         "Type": "PopePhransisBookStore.DTO.BookDTO",
         "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "StatusCode": 200
       }
@@ -59,9 +57,7 @@
       {
         "Type": "PopePhransisBookStore.DTO.BookDTO",
         "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "StatusCode": 200
       }
@@ -79,9 +75,7 @@
       {
         "Type": "System.Collections.Generic.List\u00601[[PopePhransisBookStore.DTO.BookDTO, PopePhransisBookStore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "StatusCode": 200
       }
@@ -110,9 +104,7 @@
       {
         "Type": "PopePhransisBookStore.DTO.BookDTO",
         "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "StatusCode": 200
       }
